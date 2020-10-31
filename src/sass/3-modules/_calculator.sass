@@ -1,0 +1,48 @@
+#output
+  display: block
+  padding: 10px
+
+  #formula, #display
+    display: block
+    border: none
+    text-align: right
+    padding: 5px
+    font-size: 2rem
+    height: 2rem
+
+#buttons
+  display: grid
+  grid-template-columns: auto auto auto auto
+  grid-gap: $gridGap
+  border-top: none
+  font-size: 2rem
+  padding: $buttonPadding
+
+  div
+    text-align: center
+    vertical-align: middle
+    height: $buttonSize
+    width: $buttonSize
+    line-height: $buttonSize 
+    padding: $buttonPadding
+
+    &:active
+      background: red
+
+  #clear
+    grid-column-start: 1
+    grid-column-end: span 2
+    width: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
+
+  #zero
+    grid-column-start: 1
+    grid-column-end: span 2
+    width: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
+
+  #equals
+    grid-column-start: 4 
+    grid-row-start: 4
+    grid-row-end: span 2
+    line-height: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
+    height: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
+    

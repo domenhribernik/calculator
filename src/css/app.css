@@ -1,0 +1,63 @@
+/* BASE STYLES */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  outline: none;
+  user-select: none; }
+
+.container {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 250px; }
+  .container div {
+    border: 1px solid black;
+    display: inline-block; }
+
+/* LAYOUTS */
+/* MODULES */
+#output {
+  display: block;
+  padding: 10px; }
+  #output #formula, #output #display {
+    display: block;
+    border: none;
+    text-align: right;
+    padding: 5px;
+    font-size: 2rem;
+    height: 2rem; }
+
+#buttons {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 15px;
+  border-top: none;
+  font-size: 2rem;
+  padding: 20px; }
+  #buttons div {
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    padding: 20px; }
+    #buttons div:active {
+      background: red; }
+  #buttons #clear {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    width: 155px; }
+  #buttons #zero {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    width: 155px; }
+  #buttons #equals {
+    grid-column-start: 4;
+    grid-row-start: 4;
+    grid-row-end: span 2;
+    line-height: 155px;
+    height: 155px; }
+
+/*# sourceMappingURL=app.css.map */
