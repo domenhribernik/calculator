@@ -35,7 +35,7 @@ class App extends Component {
   operation(operator) {
     this.setState(prevState => ({
       formula: prevState.formula === "" ? "0" + operator :
-      prevState.formula.includes("=") ? prevState.formula.slice(this.state.formula.indexOf("=")+1) + operator:
+      prevState.formula.includes("=") ? prevState.formula.slice(this.state.formula.indexOf("=")+1) + operator :
       ["+", "*", "/"].includes(prevState.formula.slice(-2, -1)) && prevState.formula.slice(-1) === "-" ? prevState.formula.slice(0, -2) + operator :
       operator !== "-" && ["+", "-", "*", "/"].includes(prevState.formula.slice(-1)) ? prevState.formula.slice(0, -1) + operator :
       prevState.formula.slice(-1) === operator ? prevState.formula : prevState.formula + operator,
