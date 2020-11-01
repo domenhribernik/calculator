@@ -22,10 +22,12 @@ class App extends Component {
     e.preventDefault()
     var number = e.target.innerHTML
     this.setState(prevState => ({
-      display: prevState.display === "0" ? number : 
+      display: prevState.display === "0" ? number :
+      prevState.formula.toString().length >= 9 ? "Digit limit met" : 
       prevState.formula.includes("=") ? number :
       ["+", "-", "*", "/"].includes(prevState.display) ? number : prevState.display + number,
       formula: prevState.formula === "0" || prevState.formula === "" ? number : 
+      prevState.formula.toString().length >= 9 ? "Operation canceled" :
       prevState.formula.includes("=") ? number : prevState.formula + number,
       lastNum: prevState.display === "0" ? number : 
       prevState.formula.includes("=") ? number :
@@ -35,11 +37,12 @@ class App extends Component {
   operation(operator) {
     this.setState(prevState => ({
       formula: prevState.formula === "" ? "0" + operator :
+      prevState.formula === "Operation canceled" ? prevState.formula :
       prevState.formula.includes("=") ? prevState.formula.slice(this.state.formula.indexOf("=")+1) + operator :
       ["+", "*", "/"].includes(prevState.formula.slice(-2, -1)) && prevState.formula.slice(-1) === "-" ? prevState.formula.slice(0, -2) + operator :
       operator !== "-" && ["+", "-", "*", "/"].includes(prevState.formula.slice(-1)) ? prevState.formula.slice(0, -1) + operator :
       prevState.formula.slice(-1) === operator ? prevState.formula : prevState.formula + operator,
-      display: operator,
+      display: prevState.display === "Digit limit met" ? prevState.display : operator,
       lastNum: "0"
     }))
   }
@@ -75,8 +78,6 @@ class App extends Component {
   }
   handleDecimal(e) {
     e.preventDefault()
-    // console.log(this.state.formula.indexOf("-"));
-    // console.log(this.state.formula.slice(0, this.state.formula.indexOf("-")));
     this.setState(prevState => ({
       display: prevState.display === "" ? "0." :
       prevState.display.slice(-1) === "." ? prevState.display : 
@@ -97,14 +98,14 @@ class App extends Component {
     var result
     if (this.state.formula.includes("=")) {
       result = this.state.formula.slice(this.state.formula.indexOf("=")+1)
-    } 
-    else if (["+", "-", "*", "/"].includes(this.state.formula.slice(-2, -1)) && this.state.formula.slice(-1) === "-") {
+    } else if(this.state.display === "Digit limit met") {
+      result = "Digit limit met"
+    } else if (["+", "-", "*", "/"].includes(this.state.formula.slice(-2, -1)) && this.state.formula.slice(-1) === "-") {
       this.setState(prevState => ({
         formula: prevState.formula.slice(0, -2)
       }))
       result = eval(this.state.formula.slice(0, -2))
-    }
-     else if (["+", "-", "*", "/"].includes(this.state.formula.slice(-1))) {
+    } else if (["+", "-", "*", "/"].includes(this.state.formula.slice(-1))) {
       result = eval(this.state.formula.slice(0, -1))
       this.setState(prevState => ({
         formula: prevState.formula.slice(0, -1)
@@ -112,11 +113,14 @@ class App extends Component {
     } else {
       result = eval(this.state.formula)
     }
-    console.log(result);
+    if (result !== "Digit limit met") {
+      result = Math.round(result * 10000) / 10000
+    }
     this.setState(prevState => ({
       display: prevState.formula === "" ? "0" : result,
       formula: prevState.formula === "" ? "" : 
-      prevState.formula === result ? `${prevState.formula}=${prevState.formula}` : 
+      result === "Digit limit met" ? "Operation canceled" : 
+      prevState.formula === result ? `${prevState.formula}=${prevState.formula}` :
       prevState.formula.includes("=") ? prevState.formula : `${prevState.formula}=${result}`,
       lastNum: ""
     }))
