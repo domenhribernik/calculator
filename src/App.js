@@ -10,7 +10,7 @@ class App extends Component {
       display: "0",
       formula: "",
       lastNum: ""
-    }
+    } 
     this.handleNumbers = this.handleNumbers.bind(this)
     this.handleOperator = this.handleOperator.bind(this)
     this.handleClear = this.handleClear.bind(this)

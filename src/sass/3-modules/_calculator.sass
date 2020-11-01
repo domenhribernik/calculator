@@ -1,22 +1,30 @@
 #output
   display: block
   padding: 10px
+  padding-bottom: 0px
 
   #formula, #display
     display: block
     border: none
     text-align: right
-    padding: 5px
-    font-size: 2rem
-    height: 2rem
+
+  #display
+    font-size: 2.6rem
+    height: 2.6rem     
+
+  #formula
+    font-size: 1.3rem
+    height: 1.3rem
+    color: lightgrey
+
 
 #buttons
   display: grid
   grid-template-columns: auto auto auto auto
   grid-gap: $gridGap
   border-top: none
-  font-size: 2rem
-  padding: $buttonPadding
+  font-size: 2.2rem
+  padding: 15px
 
   div
     text-align: center
@@ -25,14 +33,25 @@
     width: $buttonSize
     line-height: $buttonSize 
     padding: $buttonPadding
+    background: #333333
+    border-radius: $buttonSize / 2
+    border: 2px solid black
 
     &:active
-      background: red
+      background: #222222
+
+    &:hover
+      border: 2px solid white
 
   #clear
     grid-column-start: 1
     grid-column-end: span 2
     width: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
+    background: #A6A6A6
+    color: black
+
+    &:active
+      background: #969696
 
   #zero
     grid-column-start: 1
@@ -45,4 +64,11 @@
     grid-row-end: span 2
     line-height: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
     height: 2 * $buttonSize + 2 * $buttonPadding + $gridGap
-    
+
+  #equals, #add, #subtract, #divide, #multiply
+    background: rgba(246,46,105,1)
+    background: linear-gradient(120deg, rgba(240,14,149,1) 0%, rgba(246,46,105,1) 50%, rgba(254,83,53,1) 100%)
+
+    &:active
+      border: 2px solid black
+      color: black
