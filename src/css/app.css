@@ -15,7 +15,8 @@ body {
   margin-top: 200px;
   background: #000000;
   border-left: 20px solid black;
-  border-right: 20px solid black; }
+  border-right: 20px solid black;
+  box-shadow: 3px 3px 6px grey; }
   .container div {
     display: inline-block; }
 
